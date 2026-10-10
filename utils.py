@@ -1,6 +1,17 @@
 import os
 import json
 
+
+dir_of_commands=[
+        'readall',
+        'settask',
+        'read_done',
+        'read_undone',
+        'read_inprogress',
+        'deletetask',
+        'info'
+    ]
+
 DATA_FILE='task_list.json'
 
 current_dir=os.path.dirname(os.path.abspath(__file__))
@@ -47,7 +58,28 @@ def setTask(user_task, status):
         print('Task has been set')
         return new_task
 
- 
+def setNewStatus():
+    user_task=input("Enter task: ").strip()
+    newstatus=input("Enter new status: ").strip()
+    tasks_list=read_all_data()
+    was_updated=False
+    
+    for item in tasks_list:
+        if item.get('description')==user_task:
+            item['status']=newstatus
+            was_updated=True
+            break
+    
+    if was_updated:
+        with open(json_path,'w',encoding='utf-8') as file:
+            json.dump(tasks_list,file,ensure_ascii=False, indent=4)
+            print("Status has been set")
+        
+    else:
+        print('No such task found')
+        
+        
+    
  
     
 def getTask():
@@ -103,7 +135,7 @@ def read_inprogress_tasks():
             
 
 def delete_task():
-    task=input("Name of task to delete: ")
+    task=input("Name of task to delete: ").strip()
     with open(json_path, 'r', encoding='utf-8') as file:
         records=json.load(file)
     
@@ -112,6 +144,9 @@ def delete_task():
     if len(records)==len(updated_records):
         print('No such task.')
         return
+    
+    for index, item in enumerate(updated_records,start=1):
+        item['id']=index
     
     with open(json_path, 'w', encoding='utf-8') as file:
             json.dump(updated_records,file, ensure_ascii=False, indent=4)
@@ -122,3 +157,13 @@ def delete_task():
 def show(arg):
     for k in arg:
         print(f'[{k.get('status')}] ID: {k.get('id')} | {k.get('description')}.')
+        
+
+def print_all_data():
+    data = read_all_data()
+    show(data)
+    
+    
+def print_info():
+    for k in dir_of_commands:
+        print(f'{k}\n')

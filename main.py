@@ -1,19 +1,19 @@
 from utils import *
 
 
-def print_all_data():
-    data = read_all_data()
-    show(data)
+
 
 def main():
     
     dir_of_commands={
-        'read_all_data':print_all_data,
-        'setTask': getTask,
-        'read_done_tasks': read_done_tasks,
-        'read_undone_tasks': read_undone_tasks,
-        'read_inprogress_tasks': read_inprogress_tasks,
-        'delete_task': delete_task
+        'readall':print_all_data,
+        'settask': getTask,
+        'read_done': read_done_tasks,
+        'read_undone': read_undone_tasks,
+        'read_inprogress': read_inprogress_tasks,
+        'deletetask': delete_task,
+        'info': print_info,
+        'setnewstatus': setNewStatus
     }
     
     print('Hello! Enter command: ')

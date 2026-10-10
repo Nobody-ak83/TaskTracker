@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "description": "Nothing",
+        "description": "To study",
         "status": "in-progress"
     },
     {
         "id": 2,
-        "description": "To study",
-        "status": "in-progress"
+        "description": "Study PostgreSQL",
+        "status": "todo"
     }
 ]
