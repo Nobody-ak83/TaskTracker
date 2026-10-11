@@ -9,7 +9,9 @@ dir_of_commands=[
         'read_undone',
         'read_inprogress',
         'deletetask',
-        'info'
+        'info',
+        'setnewstatus',
+        'updatetask'
     ]
 
 DATA_FILE='task_list.json'
@@ -79,6 +81,34 @@ def setNewStatus():
         print('No such task found')
         
         
+def UpdateTask():
+    user_task_id=input("Enter task's id to update: ").strip()
+    
+    while not user_task_id:
+        user_task_id=input("Task's id can't be empty: ").strip()
+        
+    user_task_id=int(user_task_id)
+        
+    user_task_newdescription=input("New description: ").strip()
+    
+    while not user_task_newdescription:
+        user_task_newdescription=input("New description can't be empty: ").strip()
+        
+    records=read_all_data()
+    was_updated=False
+    
+    for item in records:
+        if item.get('id')==user_task_id:
+            item['description']=user_task_newdescription
+            was_updated=True
+            break
+    
+    if was_updated:
+        with open(json_path,'w',encoding='utf-8') as file:
+            json.dump(records,file,ensure_ascii=False, indent=4)
+            print('New description has been set')   
+    else:
+        print(f"Task with ID {user_task_id} not found.")  
     
  
     
@@ -136,8 +166,7 @@ def read_inprogress_tasks():
 
 def delete_task():
     task=input("Name of task to delete: ").strip()
-    with open(json_path, 'r', encoding='utf-8') as file:
-        records=json.load(file)
+    records=read_all_data()
     
     updated_records=[item for item in records if item.get('description')!=task]
     

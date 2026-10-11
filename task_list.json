@@ -1,12 +1,22 @@
 [
     {
         "id": 1,
-        "description": "To study",
+        "description": "To study coding",
         "status": "in-progress"
     },
     {
         "id": 2,
         "description": "Study PostgreSQL",
         "status": "todo"
+    },
+    {
+        "id": 3,
+        "description": "Complete book about Python",
+        "status": "undone"
+    },
+    {
+        "id": 4,
+        "description": "learn what is Migrations in back-end programming",
+        "status": "undone"
     }
 ]

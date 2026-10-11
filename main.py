@@ -13,7 +13,8 @@ def main():
         'read_inprogress': read_inprogress_tasks,
         'deletetask': delete_task,
         'info': print_info,
-        'setnewstatus': setNewStatus
+        'setnewstatus': setNewStatus,
+        'updatetask': UpdateTask
     }
     
     print('Hello! Enter command: ')
